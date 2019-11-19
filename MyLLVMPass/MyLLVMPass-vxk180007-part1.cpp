@@ -54,8 +54,7 @@ namespace {
     virtual bool runOnModule(Module &M) {
         
         bool changed = false;
-        errs() << "Hello, I am in the MyLLVMPass \n";
-
+        
         for (Module::iterator F = M.begin(), e = M.end(); F != e; ++F) {               
           for(Function::iterator bb = F->begin(), e = F->end(); bb != e; ++bb) {                
             for (BasicBlock::iterator i = bb->begin(), e = bb->end(); i!=e; ++i) {                    
