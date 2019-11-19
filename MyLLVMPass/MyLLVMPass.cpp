@@ -54,6 +54,22 @@ namespace {
     virtual bool runOnModule(Module &M) {
         
         bool changed = false;
+        errs() << "Hello, I am in the MyLLVMPass \n";
+
+        for (Module::iterator F = M.begin(), e = M.end(); F != e; ++F) {               
+          for(Function::iterator bb = F->begin(), e = F->end(); bb != e; ++bb) {                
+            for (BasicBlock::iterator i = bb->begin(), e = bb->end(); i!=e; ++i) {                    
+              // check whether instruction is actually a call
+              if (CallInst* ci = dyn_cast<CallInst>(i))  {
+                // Extracting a target (callee)
+                Value* target = ci->getCalledValue()->stripPointerCasts();                        
+                Function* f = dyn_cast<Function>(target);
+                errs() << F->getName() << " --> " << f->getName() << " (@" << ci->getName() << ")\n";                
+              }
+            } 
+          }      
+        } 
+
         return changed;
     }
   };
