@@ -87,7 +87,7 @@ namespace {
                   Value* target = ci->getCalledValue()->stripPointerCasts();
                   Function* f = dyn_cast<Function>(target);
 
-                  std::string callerToCallee = (F->getName() + " --> " + f->getName() + " (@" + ci->getName() + ")\n").str();
+                  std::string callerToCallee = (F->getName() + " --> " + f->getName() + " (@" + ci->getName() + ")").str();
                   errs() << callerToCallee << "\n";
 
                   IRBuilder<> IncrementBuilder(i);
